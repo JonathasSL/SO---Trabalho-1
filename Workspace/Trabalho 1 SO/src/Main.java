@@ -39,6 +39,9 @@ public class Main {
 				pedido.setDeliveryTime(Integer.parseInt(lineT.nextToken()));
 				pedidosList.add(pedido);
 			}
+
+			
+			//System.out.println(pedidosList.get(134).getName());
 			entry.close();
 			fileIn.close();
 			
@@ -88,10 +91,8 @@ public class Main {
 	}
 
 	public static void toString(Pedido []pedidos) {
+
 		for(int i=0;i<144;i++)
 			System.out.println(pedidos);
 	}
-
-	
-
 }
