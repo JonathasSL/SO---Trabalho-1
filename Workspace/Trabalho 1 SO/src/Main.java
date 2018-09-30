@@ -39,8 +39,10 @@ public class Main {
 				pedido.setDeliveryTime(Integer.parseInt(lineT.nextToken()));
 				pedidosList.add(pedido);
 			}
+			System.out.println(pedidosList); 
+			System.out.println(pedidosList.get(134).getName());
+			System.out.println("<3 :3 Seduction XD :P Linda S2 :* >.< ");
 
-			
 			//System.out.println(pedidosList.get(134).getName());
 			entry.close();
 			fileIn.close();
