@@ -43,6 +43,6 @@ public class Pedido {
 	}
 	
 	public String toString() {
-		return "Nome: "+name+"\nPapers Ammount: "+papersAmmount+"\nPrice per paper: "+price+"\nDelivery Time: "+deliveryTime+"\n\n";
+		return "Nome: "+name+"\tPapers Ammount: "+papersAmmount+"\tPrice per paper: "+price+"\tDelivery Time: "+deliveryTime;
 	}
 }
