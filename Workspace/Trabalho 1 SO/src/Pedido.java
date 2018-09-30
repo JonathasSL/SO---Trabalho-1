@@ -3,6 +3,7 @@ public class Pedido {
 	private int papersAmmount;
 	private float price;
 	private int deliveryTime;
+	private int timeDelivered;
 	
 	public Pedido(String name, int papersAmmount, float price, int deliveryTime) {
 		this.name=name;
@@ -44,5 +45,11 @@ public class Pedido {
 	
 	public String toString() {
 		return "Nome: "+name+"\nPapers Ammount: "+papersAmmount+"\nPrice per paper: "+price+"\nDelivery Time: "+deliveryTime+"\n\n";
+	}
+	public int getTimeDelivered() {
+		return timeDelivered;
+	}
+	public void setTimeDelivered(int timeDelivered) {
+		this.timeDelivered = timeDelivered;
 	}
 }
