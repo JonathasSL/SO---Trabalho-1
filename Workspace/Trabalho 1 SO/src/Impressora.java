@@ -21,7 +21,8 @@ public class Impressora {
 	
 	
 
-	public int getTempoDecorrido() {
+
+		public int getTempoDecorrido() {
 		return tempoDecorrido;
 	}
 	public void setTempoDecorrido(int tempoDecorrido) {

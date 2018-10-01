@@ -21,6 +21,7 @@ public class Pedido {
 		setTimeLeft();
 		setTotalPrice();
 		setTempoDecorrido(0);
+
 	}
 
 	public String getName() {
@@ -47,7 +48,7 @@ public class Pedido {
 		return this;
 	}
 
-	public int getDeliveryTime() {
+	public float getDeliveryTime() {
 		return deliveryTime;
 	}
 	private Pedido setDeliveryTime(int deliveryTime) {
@@ -62,6 +63,7 @@ public class Pedido {
 	public float getTimeDelivered() {
 		return timeDelivered;
 	}
+  
 	public Pedido setTimeDelivered(float timeDelivered) {
 		this.timeDelivered = timeDelivered;
 		return this;
@@ -72,6 +74,7 @@ public class Pedido {
 	}
 	public Pedido setTimeLeft() {
 		if(deliveryTime!=0)
+
 			this.timeLeft = deliveryTime-getDuration();
 		return this;
 	}
@@ -90,7 +93,6 @@ public class Pedido {
 		this.totalPrice = papersAmmount*price;
 	}
 
-
 	public float getTempoDecorrido() {
 		return tempoDecorrido;
 	}
@@ -105,5 +107,5 @@ public class Pedido {
 	public void setStartedTime(float startedTime) {
 		this.startedTime = startedTime;
 	}
-	
+
 }

@@ -56,6 +56,7 @@ public class FilaDePrioridade{
 	}
 
 	public void definePriority() {
+
 		for(int i=0;i<list.size();i++) {
 			if(list.get(i).getDeliveryTime()==0)
 				l5.add(list.get(i));
@@ -78,6 +79,9 @@ public class FilaDePrioridade{
 
 	public float getTempoGasto() {
 		return tempoGasto;
+    
+	public Pedido getBiggerLeftTime() {
+		return p;
 	}
 
 	public void setTempoGasto(float tempoGasto) {
