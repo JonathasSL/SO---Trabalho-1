@@ -28,7 +28,7 @@ public class FilaDePrioridade{
 
 
 	public Pedido getSmallerLeftTime() {
-		int duration=(list.get(1).getDeliveryTime())-(list.get(1).getPapersAmmount()/8);
+		float duration=(list.get(1).getDeliveryTime())-(list.get(1).getPapersAmmount()/8);
 		for(int i=0;i<list.size();i++) {
 			if(list.get(i).getDeliveryTime()!=0)
 				if((list.get(i).getDeliveryTime()) - (list.get(i).getPapersAmmount()/80)<duration) {
@@ -39,7 +39,7 @@ public class FilaDePrioridade{
 	}
 
 	public Pedido getBiggerLeftTime() {
-
+		return p;
 	}
 
 	public void definePriority() {
