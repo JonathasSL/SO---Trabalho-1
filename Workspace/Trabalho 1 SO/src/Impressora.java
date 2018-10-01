@@ -17,6 +17,11 @@ public class Impressora {
 	public void imprimirFila() {
 		Fila fila = new Fila(list);
 	}
+	
+	
+	
+
+
 		public int getTempoDecorrido() {
 		return tempoDecorrido;
 	}
@@ -38,11 +43,3 @@ public class Impressora {
 		this.list = list;
 	}
 }
-
-
-
-
-
-
-
-

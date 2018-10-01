@@ -23,7 +23,8 @@ public class Main {
 			//Lista de pedidos
 			ArrayList<Pedido> pedidosList = new ArrayList<>();
 
-			///Salvando arquivo texto na memoria primaria
+
+			//Salvando arquivo texto na memoria primaria
 			for(int i=0;i<nPedidos;i++) {
 				String line = entry.readLine();
 				StringTokenizer lineT = new StringTokenizer(line,";");
@@ -40,7 +41,6 @@ public class Main {
 				Pedido pedido = new Pedido(name,papersAmmount,price,deliveryTime);
 				pedidosList.add(pedido);
 			}
-
 			entry.close();
 			fileIn.close();
 
@@ -61,17 +61,63 @@ public class Main {
 					"========================\n");
 
 			System.out.println("Impressora 1\n");
-			System.out.println("Impressões entregues no prazo: "+impressora1.impressoesDentroDoPrazo());
-			System.out.println("Tempo Médio de Retorno: "+impressora1.mediaTempoRetorno());
-			System.out.println("Tempo Médio de Resposta: "+impressora1.mediaTempoResposta());
-			System.out.println("Tempo Total de Impressão: "+impressora1.executa());
+			System.out.println("ImpressÃµes entregues no prazo: "+impressora1.impressoesDentroDoPrazo());
+			System.out.println("Tempo MÃ©dio de Retorno: "+impressora1.mediaTempoRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+impressora1.mediaTempoResposta());
+			System.out.println("Tempo Total de ImpressÃ£o: "+impressora1.executa());
 
 			System.out.println("\nImpressora 2\n");
-			System.out.println("Impressões entregues no prazo: "+impressora2.impressoesDentroDoPrazo());
-			System.out.println("Tempo Médio de Retorno: "+impressora2.mediaTempoRetorno());
-			System.out.println("Tempo Médio de Resposta: "+impressora2.mediaTempoResposta());
-			System.out.println("Tempo Total de Impressão: "+impressora2.executa());
+			System.out.println("ImpressÃµes entregues no prazo: "+impressora2.impressoesDentroDoPrazo());
+			System.out.println("Tempo MÃ©dio de Retorno: "+impressora2.mediaTempoRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+impressora2.mediaTempoResposta());
+			System.out.println("Tempo Total de ImpressÃ£o: "+impressora2.executa());
 
+
+      
+      
+      
+      
+			FilaDePrioridade fp = new FilaDePrioridade(list1);
+			System.out.println("\n\n=======================\n"+
+								"==FILA DE PRIORIDADES==\n"+
+								"=======================");
+			System.out.println("\n\nImpressora 1");
+			System.out.println("Impresoes entregues no prazo= "+fp.getEntreguesNoPrazo()+" de "+list1.size());
+			System.out.println("Tempo MÃ©dio de Retorno: "+fp.getMediaRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+fp.getMediaResposta());
+			System.out.println("Tempo total de impressÃ£o: "+fp.getTempoGasto());
+			
+			FilaDePrioridade fp2 = new FilaDePrioridade(list2);
+			System.out.println("\n\nImpressora 2");
+			System.out.println("Impresoes entregues no prazo= "+fp2.getEntreguesNoPrazo()+" de "+list2.size());
+			System.out.println("Tempo MÃ©dio de Retorno: "+fp2.getMediaRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+fp2.getMediaResposta());
+			System.out.println("Tempo total de impressÃ£o: "+fp2.getTempoGasto());
+			
+			
+
+			RoundRobin r1 = new RoundRobin(list1);
+			RoundRobin r2 = new RoundRobin(list2);
+			float tempot1 = r1.executa();
+			float tempot2 = r2.executa();
+			
+			System.out.println("\n\n=======================\n"+
+								"======Round Robin======\n"+
+								"=======================");
+			System.out.println("\n\nImpressora 1");
+			System.out.println("Impresoes entregues no prazo= "+r1.getEntreguesNoPrazo()+" de "+list1.size());
+			System.out.println("Tempo MÃ©dio de Retorno: "+r1.getMediaRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+r1.getMediaResposta());
+			
+
+			System.out.println("\n\nImpressora 2");
+			System.out.println("Impresoes entregues no prazo= "+r2.getEntreguesNoPrazo()+" de "+list2.size());
+			System.out.println("Tempo MÃ©dio de Retorno: "+r2.getMediaRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+r2.getMediaResposta());
+			
+			
+			
+			
 
 //---------------------------------------------------------------------------------------
 
@@ -91,37 +137,26 @@ public class Main {
 					"=======FILA COM 3=======\n"+
 					"========================\n");
 			System.out.println("Impressora 1\n");
-			System.out.println("Impressões entregues no prazo: "+impressora1.impressoesDentroDoPrazo());
-			System.out.println("Tempo Médio de Retorno: "+impressora1.mediaTempoRetorno());
-			System.out.println("Tempo Médio de Resposta: "+impressora1.mediaTempoResposta());
-			System.out.println("Tempo Total de Impressão: "+impressora1.executa());
+			System.out.println("ImpressÃµes entregues no prazo: "+impressora1.impressoesDentroDoPrazo());
+			System.out.println("Tempo MÃ©dio de Retorno: "+impressora1.mediaTempoRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+impressora1.mediaTempoResposta());
+			System.out.println("Tempo Total de ImpressÃ£o: "+impressora1.executa());
 
 			System.out.println("\nImpressora 2\n");
-			System.out.println("Impressões entregues no prazo: "+impressora2.impressoesDentroDoPrazo());
-			System.out.println("Tempo Médio de Retorno: "+impressora2.mediaTempoRetorno());
-			System.out.println("Tempo Médio de Resposta: "+impressora2.mediaTempoResposta());
-			System.out.println("Tempo Total de Impressão: "+impressora2.executa());
+			System.out.println("ImpressÃµes entregues no prazo: "+impressora2.impressoesDentroDoPrazo());
+			System.out.println("Tempo MÃ©dio de Retorno: "+impressora2.mediaTempoRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+impressora2.mediaTempoResposta());
+			System.out.println("Tempo Total de ImpressÃ£o: "+impressora2.executa());
 
 
 			System.out.println("\nImpressora 3\n");
-			System.out.println("Impressões entregues no prazo: "+impressora3.impressoesDentroDoPrazo());
-			System.out.println("Tempo Médio de Retorno: "+impressora3.mediaTempoRetorno());
-			System.out.println("Tempo Médio de Resposta: "+impressora3.mediaTempoResposta());
-			System.out.println("Tempo Total de Impressão: "+impressora3.executa());
+			System.out.println("ImpressÃµes entregues no prazo: "+impressora3.impressoesDentroDoPrazo());
+			System.out.println("Tempo MÃ©dio de Retorno: "+impressora3.mediaTempoRetorno());
+			System.out.println("Tempo MÃ©dio de Resposta: "+impressora3.mediaTempoResposta());
+			System.out.println("Tempo Total de ImpressÃ£o: "+impressora3.executa());
 
 
 
-
-
-
-			//	FilaDePrioridade fp = new FilaDePrioridade(pedidosList);
-			//	System.out.println("\n\n=======================\n"+
-			//					   "==FILA DE PRIORIDADES==\n"+
-			//				  	   "=======================\n");
-
-
-			Impressora imp1 = new Impressora();
-			Impressora imp2 = new Impressora();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -132,7 +167,6 @@ public class Main {
 	}
 
 	public static void toString(Pedido []pedidos) {
-
 		for(int i=0;i<144;i++)
 			System.out.println(pedidos);
 	}

@@ -3,23 +3,24 @@ public class Pedido {
 	private String name;
 	private int papersAmmount;
 	private float price;
-	private float deliveryTime;
+	private int deliveryTime;
 	//Do programa
 	private float timeDelivered;
 	private float timeLeft;
-	private int duration;
+	private float duration;
 	private float totalPrice;
+	private float tempoDecorrido;
 	private float startedTime;
-
 
 	public Pedido(String name, int papersAmmount, float price, int deliveryTime) {
 		setName(name);
 		setPapersAmmount(papersAmmount);
 		setPrice(price);
 		setDeliveryTime(deliveryTime);
-		setTimeLeft();
 		setDuration();
+		setTimeLeft();
 		setTotalPrice();
+		setTempoDecorrido(0);
 
 	}
 
@@ -62,7 +63,8 @@ public class Pedido {
 	public float getTimeDelivered() {
 		return timeDelivered;
 	}
-	public Pedido setTimeDelivered(int timeDelivered) {
+  
+	public Pedido setTimeDelivered(float timeDelivered) {
 		this.timeDelivered = timeDelivered;
 		return this;
 	}
@@ -72,11 +74,12 @@ public class Pedido {
 	}
 	public Pedido setTimeLeft() {
 		if(deliveryTime!=0)
-			this.timeLeft = deliveryTime-(papersAmmount/80);
+
+			this.timeLeft = deliveryTime-getDuration();
 		return this;
 	}
 
-	public int getDuration() {
+	public float getDuration() {
 		return duration;
 	}
 	private void setDuration() {
@@ -90,13 +93,19 @@ public class Pedido {
 		this.totalPrice = papersAmmount*price;
 	}
 
+	public float getTempoDecorrido() {
+		return tempoDecorrido;
+	}
+
+	public void setTempoDecorrido(float tempoDecorrido) {
+		this.tempoDecorrido += tempoDecorrido;
+	}
+
 	public float getStartedTime() {
 		return startedTime;
 	}
-
 	public void setStartedTime(float startedTime) {
 		this.startedTime = startedTime;
 	}
-
 
 }
