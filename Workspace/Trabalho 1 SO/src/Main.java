@@ -2,6 +2,7 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.LineNumberInputStream;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -21,68 +22,106 @@ public class Main {
 
 			//Lista de pedidos
 			ArrayList<Pedido> pedidosList = new ArrayList<>();
-			
-			//Salvando arquivo texto na memoria primaria
+
+			///Salvando arquivo texto na memoria primaria
 			for(int i=0;i<nPedidos;i++) {
 				String line = entry.readLine();
 				StringTokenizer lineT = new StringTokenizer(line,";");
 
-				Pedido pedido = new Pedido();
-				pedido.setName(lineT.nextToken());
-				pedido.setPapersAmmount(Integer.parseInt(lineT.nextToken()));
+				String name = lineT.nextToken();
+				int papersAmmount = Integer.parseInt(lineT.nextToken());
 
-				//Gambs
+				//Gambs - lendo a string e transformando em float
 				StringTokenizer priceT = new StringTokenizer(lineT.nextToken(),",");
 				float price = Integer.parseInt(priceT.nextToken()) + Float.parseFloat(priceT.nextToken())/100;
-				pedido.setPrice(price);
 
-				pedido.setDeliveryTime(Integer.parseInt(lineT.nextToken()));
+				int deliveryTime = Integer.parseInt(lineT.nextToken());
+
+				Pedido pedido = new Pedido(name,papersAmmount,price,deliveryTime);
 				pedidosList.add(pedido);
 			}
-			System.out.println(pedidosList); 
-			System.out.println(pedidosList.get(134).getName());
-			System.out.println("<3 :3 Seduction XD :P Linda S2 :* >.< ");
 
-			//System.out.println(pedidosList.get(134).getName());
 			entry.close();
 			fileIn.close();
-			
-			
-			int c=0,total=0;
-			Pedido menor = null, maior = pedidosList.get(0);
-			for(int i=0;i<pedidosList.size();i++)
-				if(pedidosList.get(i).getDeliveryTime()!=0)
-					menor = pedidosList.get(i);
-			
-			for(int i=0;i<pedidosList.size();i++) {
-				
-				if(pedidosList.get(i).getDeliveryTime()<menor.getDeliveryTime() && pedidosList.get(i).getDeliveryTime()!=0)
-					menor=pedidosList.get(i);
-				else
-					if(pedidosList.get(i).getDeliveryTime()>maior.getDeliveryTime())
-						maior=pedidosList.get(i);
-				
-				if(pedidosList.get(i).getDeliveryTime()!=0) {
-					total+=pedidosList.get(i).getDeliveryTime();
-					c++;
-				}
-			}
-		
 
-			System.out.println("total: "+total+" c: "+c+" media:"+total/c+"\nMenor: "+menor.getDeliveryTime()+" Maior: "+maior.getDeliveryTime());
+			ArrayList<Pedido> list1 = new ArrayList<Pedido>();
+			ArrayList<Pedido> list2 = new ArrayList<Pedido>();
 
+			for(int i=0;i<pedidosList.size()/2;i++)
+				list1.add(pedidosList.get(i));
 
-//			for(int i=0;i<pedidosList.size();i++) {
-//				if(pedidosList.get(i).getDeliveryTime()==2)
-//					System.out.println(pedidosList.get(i));
-//			}
-			//				if(pedidosList.get(i).getDeliveryTime()!=0)
-			//					System.out.println(pedidosList.get(i).getDeliveryTime());
+			for(int i=pedidosList.size()/2;i<pedidosList.size();i++)
+				list2.add(pedidosList.get(i));
+
+			Fila impressora1 = new Fila (list1);
+			Fila impressora2 = new Fila (list2);
+
+			System.out.println("\n========================\n"+
+					"=======FILA COM 2=======\n"+
+					"========================\n");
+
+			System.out.println("Impressora 1\n");
+			System.out.println("Impressões entregues no prazo: "+impressora1.impressoesDentroDoPrazo());
+			System.out.println("Tempo Médio de Retorno: "+impressora1.mediaTempoRetorno());
+			System.out.println("Tempo Médio de Resposta: "+impressora1.mediaTempoResposta());
+			System.out.println("Tempo Total de Impressão: "+impressora1.executa());
+
+			System.out.println("\nImpressora 2\n");
+			System.out.println("Impressões entregues no prazo: "+impressora2.impressoesDentroDoPrazo());
+			System.out.println("Tempo Médio de Retorno: "+impressora2.mediaTempoRetorno());
+			System.out.println("Tempo Médio de Resposta: "+impressora2.mediaTempoResposta());
+			System.out.println("Tempo Total de Impressão: "+impressora2.executa());
 
 
-//			System.out.println(pedidosList.get(134).getName());
-			FilaDePrioridade fp = new FilaDePrioridade(pedidosList);
-			
+//---------------------------------------------------------------------------------------
+
+			ArrayList<Pedido> list3 = new ArrayList<Pedido>();
+			for(int i=0;i<pedidosList.size()/3;i++)
+				list1.add(pedidosList.get(i));
+
+			for(int i=pedidosList.size()/3;i<2*pedidosList.size()/3;i++)
+				list2.add(pedidosList.get(i));
+
+			for(int i=2*pedidosList.size()/3;i<pedidosList.size();i++)
+				list3.add(pedidosList.get(i));
+
+			Fila impressora3 = new Fila (list3);
+
+			System.out.println("\n========================\n"+
+					"=======FILA COM 3=======\n"+
+					"========================\n");
+			System.out.println("Impressora 1\n");
+			System.out.println("Impressões entregues no prazo: "+impressora1.impressoesDentroDoPrazo());
+			System.out.println("Tempo Médio de Retorno: "+impressora1.mediaTempoRetorno());
+			System.out.println("Tempo Médio de Resposta: "+impressora1.mediaTempoResposta());
+			System.out.println("Tempo Total de Impressão: "+impressora1.executa());
+
+			System.out.println("\nImpressora 2\n");
+			System.out.println("Impressões entregues no prazo: "+impressora2.impressoesDentroDoPrazo());
+			System.out.println("Tempo Médio de Retorno: "+impressora2.mediaTempoRetorno());
+			System.out.println("Tempo Médio de Resposta: "+impressora2.mediaTempoResposta());
+			System.out.println("Tempo Total de Impressão: "+impressora2.executa());
+
+
+			System.out.println("\nImpressora 3\n");
+			System.out.println("Impressões entregues no prazo: "+impressora3.impressoesDentroDoPrazo());
+			System.out.println("Tempo Médio de Retorno: "+impressora3.mediaTempoRetorno());
+			System.out.println("Tempo Médio de Resposta: "+impressora3.mediaTempoResposta());
+			System.out.println("Tempo Total de Impressão: "+impressora3.executa());
+
+
+
+
+
+
+			//	FilaDePrioridade fp = new FilaDePrioridade(pedidosList);
+			//	System.out.println("\n\n=======================\n"+
+			//					   "==FILA DE PRIORIDADES==\n"+
+			//				  	   "=======================\n");
+
+
+			Impressora imp1 = new Impressora();
+			Impressora imp2 = new Impressora();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

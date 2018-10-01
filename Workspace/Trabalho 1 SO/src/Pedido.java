@@ -1,55 +1,102 @@
 public class Pedido {
+	//Do arquivo
 	private String name;
 	private int papersAmmount;
 	private float price;
-	private int deliveryTime;
-	private int timeDelivered;
-	
+	private float deliveryTime;
+	//Do programa
+	private float timeDelivered;
+	private float timeLeft;
+	private int duration;
+	private float totalPrice;
+	private float startedTime;
+
+
 	public Pedido(String name, int papersAmmount, float price, int deliveryTime) {
-		this.name=name;
-		this.papersAmmount=papersAmmount;
-		this.price=price;
-		this.deliveryTime=deliveryTime;
-	}
-	public Pedido() {
-		
+		setName(name);
+		setPapersAmmount(papersAmmount);
+		setPrice(price);
+		setDeliveryTime(deliveryTime);
+		setTimeLeft();
+		setDuration();
+		setTotalPrice();
+
 	}
 
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	private Pedido setName(String name) {
 		this.name = name;
+		return this;
 	}
 
 	public int getPapersAmmount() {
 		return papersAmmount;
 	}
-	public void setPapersAmmount(int papersAmmount) {
+	private Pedido setPapersAmmount(int papersAmmount) {
 		this.papersAmmount = papersAmmount;
+		return this;
 	}
 
 	public float getPrice() {
 		return price;
 	}
-	public void setPrice(float price) {
+	private Pedido setPrice(float price) {
 		this.price = price;
+		return this;
 	}
 
-	public int getDeliveryTime() {
+	public float getDeliveryTime() {
 		return deliveryTime;
 	}
-	public void setDeliveryTime(int deliveryTime) {
+	private Pedido setDeliveryTime(int deliveryTime) {
 		this.deliveryTime = deliveryTime;
+		return this;
 	}
-	
+
 	public String toString() {
 		return "Nome: "+name+"\tPapers Ammount: "+papersAmmount+"\tPrice per paper: "+price+"\tDelivery Time: "+deliveryTime;
 	}
-	public int getTimeDelivered() {
+
+	public float getTimeDelivered() {
 		return timeDelivered;
 	}
-	public void setTimeDelivered(int timeDelivered) {
+	public Pedido setTimeDelivered(int timeDelivered) {
 		this.timeDelivered = timeDelivered;
+		return this;
 	}
+
+	public float getTimeLeft() {
+		return timeLeft;
+	}
+	public Pedido setTimeLeft() {
+		if(deliveryTime!=0)
+			this.timeLeft = deliveryTime-(papersAmmount/80);
+		return this;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+	private void setDuration() {
+		this.duration = papersAmmount/80;
+	}
+
+	public float getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice() {
+		this.totalPrice = papersAmmount*price;
+	}
+
+	public float getStartedTime() {
+		return startedTime;
+	}
+
+	public void setStartedTime(float startedTime) {
+		this.startedTime = startedTime;
+	}
+
+
 }
