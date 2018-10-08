@@ -20,10 +20,19 @@ public class Pedido {
 		setDuration();
 		setTimeLeft();
 		setTotalPrice();
-		setTempoDecorrido(0);
+		this.tempoDecorrido=0;
 
 	}
 
+	public void restart() {
+		this.timeDelivered=0;
+		this.tempoDecorrido=0;
+		this.startedTime=0;
+		setDuration();
+		setTimeLeft();
+		setTotalPrice();
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -63,7 +72,6 @@ public class Pedido {
 	public float getTimeDelivered() {
 		return timeDelivered;
 	}
-  
 	public Pedido setTimeDelivered(float timeDelivered) {
 		this.timeDelivered = timeDelivered;
 		return this;
@@ -74,7 +82,6 @@ public class Pedido {
 	}
 	public Pedido setTimeLeft() {
 		if(deliveryTime!=0)
-
 			this.timeLeft = deliveryTime-getDuration();
 		return this;
 	}
@@ -96,7 +103,6 @@ public class Pedido {
 	public float getTempoDecorrido() {
 		return tempoDecorrido;
 	}
-
 	public void setTempoDecorrido(float tempoDecorrido) {
 		this.tempoDecorrido += tempoDecorrido;
 	}
@@ -108,4 +114,7 @@ public class Pedido {
 		this.startedTime = startedTime;
 	}
 
+	public float getDurationLeft() {
+		return duration - tempoDecorrido;
+	}
 }

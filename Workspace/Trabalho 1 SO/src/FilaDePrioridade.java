@@ -4,6 +4,8 @@ public class FilaDePrioridade{
 	private ArrayList<Pedido> list;
 	private float tempoGasto;
 
+//	private ArrayList<?> lp[] = new ArrayList<>[5];
+	
 	private ArrayList<Pedido> l1 = new ArrayList<Pedido>();
 	private ArrayList<Pedido> l2 = new ArrayList<Pedido>();
 	private ArrayList<Pedido> l3 = new ArrayList<Pedido>();
@@ -11,25 +13,46 @@ public class FilaDePrioridade{
 	private ArrayList<Pedido> l5 = new ArrayList<Pedido>();
 
 
+
 	public FilaDePrioridade(ArrayList<Pedido> list){
 		this.list=list;
 		definePriority();
-		RoundRobin r1 = new RoundRobin(l1);
-		RoundRobin r2 = new RoundRobin(l2);
-		RoundRobin r3 = new RoundRobin(l3);
-		RoundRobin r4 = new RoundRobin(l4);
-		RoundRobin r5 = new RoundRobin(l5);
-		setTempoGasto(r1.executa()+r2.executa()+r3.executa()+r4.executa()+r5.executa());
+	}
+	
+	public void executaRoundRobin() {
+		RoundRobin rr[] = new RoundRobin[5];
+		for(int i=0;i<rr.length;i++)
+			rr[i] = new RoundRobin();
+
+		for(int i=0;i<rr.length;i++)
+			rr[i].setList(getPriority(i+1,list));
+
+		tempoGasto=0;
+		for(int i=0;i<rr.length;i++)
+			tempoGasto +=rr[i].executa();		
+	}
+
+	public void executaFila() {
+		Fila f[] = new Fila[5];
+		for(int i=0;i<f.length;i++)
+			f[i] = new Fila();
+
+		for(int i=0;i<f.length;i++)
+			f[i].setLista(getPriority(i+1,list));
+
+		tempoGasto=0;
+		for(int i=0;i<f.length;i++)
+			tempoGasto+=f[i].executa();	
 	}
 	
 	public int getEntreguesNoPrazo() {
 		int entregues=0;
 		for(int i=0;i<list.size();i++)
-			if(list.get(i).getTimeDelivered()<=list.get(i).getDeliveryTime())
+			if(list.get(i).getDeliveryTime() != 0 && list.get(i).getTimeDelivered() < list.get(i).getDeliveryTime())
 				entregues++;
 		return entregues;
 	}
-	
+
 	public float getMediaRetorno() {
 		float tempoRetorno=0;
 		for(int i=0;i<list.size();i++) {
@@ -38,7 +61,7 @@ public class FilaDePrioridade{
 		tempoRetorno /= list.size();
 		return tempoRetorno;
 	}
-	
+
 	public float getMediaResposta() {
 		float tempoDeResposta=0;
 		for(int i=0;i<list.size();i++) {
@@ -47,46 +70,80 @@ public class FilaDePrioridade{
 		tempoDeResposta /= list.size();
 		return tempoDeResposta;
 	}
-		
+
 	public ArrayList<Pedido> getList() {
 		return list;
 	}
 	public void setList(ArrayList<Pedido> list) {
 		this.list = list;
+		definePriority();
 	}
 
-	public void definePriority() {
+	private ArrayList<Pedido> getPriority(int priority, ArrayList<Pedido> list){
+
+		ArrayList<Pedido> listP = new ArrayList<Pedido>(); 
+		if(priority == 5) {
+			for(int i=0;i<list.size();i++) 
+				if(list.get(i).getDeliveryTime()==0)
+					listP.add(list.get(i));
+		}else
+			for(int i=0;i<list.size();i++)
+				if((getBiggerLeftTime()/4)*(priority-1) <= list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (getBiggerLeftTime()/4)*priority) 
+					listP.add(list.get(i));
+
+		return listP;
+	}
+
+	private void definePriority() {
 
 		for(int i=0;i<list.size();i++) {
 			if(list.get(i).getDeliveryTime()==0)
 				l5.add(list.get(i));
 			else {
-				if((260/4)*0 <= list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (260/4)*1) 
+				if((getBiggerLeftTime()/4)*0 <= list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (getBiggerLeftTime()/4)*1) 
 					l1.add(list.get(i));
 				else
-					if((260/4)*1 < list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (260/4)*2)
+					if((getBiggerLeftTime()/4)*1 < list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (getBiggerLeftTime()/4)*2)
 						l2.add(list.get(i));
 					else
-						if((260/4)*2 < list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (260/4)*3)
+						if((getBiggerLeftTime()/4)*2 < list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (getBiggerLeftTime()/4)*3)
 							l3.add(list.get(i));
 						else
-							if((260/4)*3 < list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= 260)
+							if((getBiggerLeftTime()/4)*3 < list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= getBiggerLeftTime())
 								l4.add(list.get(i));
 			}
 		}
 	}
 
-
+//	private void definePriorityArray() {
+//		
+//		for(int priority=1;priority<=lp.length;priority++)
+//			if(priority == 5) {
+//				for(int i=0;i<list.size();i++) 
+//					if(list.get(i).getDeliveryTime()==0)
+//						lp[priority-1].add(list.get(i));
+//			}else
+//				for(int i=0;i<list.size();i++)
+//					if((getBiggerLeftTime()/lp.length-1)*(priority-1) <= list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (getBiggerLeftTime()/lp.length-1)*priority) 
+//						lp[priority-1].add(list.get(i));
+//		
+//	}
+	
 	public float getTempoGasto() {
 		return tempoGasto;
-    
-	public Pedido getBiggerLeftTime() {
-		return p;
+	}
+
+	public int getBiggerLeftTime() {
+		int bigger=0;
+		for(int i=0;i<list.size();i++)
+			if(0 < list.get(i).getDeliveryTime()-list.get(i).getDuration())
+				bigger = (int) (list.get(i).getDeliveryTime() - list.get(i).getDuration());
+		return bigger;
 	}
 
 	public void setTempoGasto(float tempoGasto) {
 		this.tempoGasto = tempoGasto;
 	}
 
-	
+
 }

@@ -9,10 +9,14 @@ public class Fila {
 	public Fila(ArrayList<Pedido> lista) {
 		setLista(lista);
 		setTempoGasto(tempoGasto);
-		setMediaTempoRetorno(mediaTempoRetorno()); 
 		executa();
+		setMediaTempoRetorno(mediaTempoRetorno()); 
 	}
-	public void setLista (ArrayList<Pedido> lista) {
+	public Fila() {
+		setTempoGasto(0);
+	}
+	
+ 	public void setLista (ArrayList<Pedido> lista) {
 		this.lista = lista;
 	}
 
@@ -66,13 +70,6 @@ public class Fila {
 		}
 		return tempoMedioResposta / lista.size();
 	}
-
-	
-
-
-
-
-
 
 }
 

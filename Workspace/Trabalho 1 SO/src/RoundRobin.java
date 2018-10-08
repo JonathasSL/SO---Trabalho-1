@@ -3,36 +3,42 @@ import java.util.ArrayList;
 public class RoundRobin {
 	private ArrayList<Pedido> list;
 	public float tempoDecorrido;
+	private int quantum = 7;
 
 	public RoundRobin(ArrayList<Pedido> list) {
 		setList(list);
 		setTempoDecorrido(0);
 	}
-
-	public float executa() {
-		int quantum = 5;
+	public RoundRobin() {
+		setTempoDecorrido(0);
+	}
+	public RoundRobin(int quantum) {
+		setTempoDecorrido(0);
+		this.quantum = 7;
+	}
+	
+	public float executa() {		
 		while(!terminou()) {
 			for(int i=0;i<list.size();i++) {
 				if(list.get(i).getTempoDecorrido() < list.get(i).getDuration()) {
 					if(list.get(i).getTempoDecorrido()==0)
 						list.get(i).setStartedTime(tempoDecorrido);
 
-					if(list.get(i).getDuration() - list.get(i).getTempoDecorrido() < quantum) {
-						list.get(i).setTempoDecorrido(list.get(i).getDuration() - list.get(i).getTempoDecorrido());
-						tempoDecorrido+=list.get(i).getDuration() - list.get(i).getTempoDecorrido();
-					}else {
+					if(list.get(i).getDurationLeft() > quantum) {
 						list.get(i).setTempoDecorrido(quantum);
+						tempoDecorrido+=quantum;//list.get(i).getDurationLeft() ?
+					}else {
+						list.get(i).setTempoDecorrido(list.get(i).getDurationLeft());
 						tempoDecorrido+=quantum;
 					}
 
-					if(list.get(i).getTempoDecorrido()<list.get(i).getDuration()) 
+					if(list.get(i).getTempoDecorrido()<=list.get(i).getDuration()) 
 						list.get(i).setTimeDelivered(tempoDecorrido);
 
 					tempoDecorrido+=0.25;
 				}
 			}
 		}
-		System.out.println("tempodecorrido "+tempoDecorrido);
 		return tempoDecorrido;
 
 	}
@@ -47,7 +53,7 @@ public class RoundRobin {
 	public int getEntreguesNoPrazo() {
 		int entregues=0;
 		for(int i=0;i<list.size();i++)
-			if(list.get(i).getTimeDelivered()<=list.get(i).getDeliveryTime())
+			if(list.get(i).getDeliveryTime() !=0 && list.get(i).getTimeDelivered()<=list.get(i).getDeliveryTime())
 				entregues++;
 		return entregues;
 	}
@@ -80,5 +86,12 @@ public class RoundRobin {
 
 	public void setTempoDecorrido(float tempoDecorrido) {
 		this.tempoDecorrido = tempoDecorrido;
+	}
+	
+	public int getQuantum() {
+		return quantum;
+	}
+	public void setQuantum(int quantum) {
+		this.quantum = quantum;
 	}
 }
