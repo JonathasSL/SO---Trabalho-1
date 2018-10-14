@@ -48,7 +48,7 @@ public class Fila {
 	public int impressoesDentroDoPrazo (){
 		int entreguesNoPrazo = 0;
 		for (int i=0; i<lista.size(); i++) { 
-			if (lista.get(i).getTimeDelivered() < lista.get(i).getDeliveryTime() || lista.get(i).getDeliveryTime()==0) {
+			if (lista.get(i).getTimeDelivered() < lista.get(i).getDeliveryTime() && lista.get(i).getDeliveryTime()!=0) {
 				//System.out.println(lista.get(i).getDeliveryTime()+"\t"+lista.get(i).getTimeDelivered());
 				entreguesNoPrazo ++;
 			}
