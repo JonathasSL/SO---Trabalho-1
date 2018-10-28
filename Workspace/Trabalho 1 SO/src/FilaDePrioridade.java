@@ -45,6 +45,14 @@ public class FilaDePrioridade{
 			tempoGasto+=f[i].executa();	
 	}
 	
+	public int getComEntrega() {
+		int comEntrega = 0;
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).hasDelivery())
+				comEntrega++;
+		return comEntrega;
+	}
+	
 	public int getEntreguesNoPrazo() {
 		int entregues=0;
 		for(int i=0;i<list.size();i++)
