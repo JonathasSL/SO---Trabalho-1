@@ -8,15 +8,15 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
+	static final String NOMEARQUIVO = "dadosGrafica.txt";
 
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
-		final String nomeArquivo = "dadosGrafica.txt";
 
 		do {
-			ArrayList<Pedido> pedidosList = retornaArquivo(nomeArquivo);
+			ArrayList<Pedido> pedidosList = retornaArquivo(NOMEARQUIVO);
 			switch(menu()) {
-			case 1:
+			case 1: //Imprimir
 				switch(menuImpressao()) {
 				case 1:
 					//			
@@ -66,7 +66,7 @@ public class Main {
 						System.out.println("\n========================\n"+
 								"=======FILA COM 3=======\n"+
 								"========================\n");
-						pedidosList = retornaArquivo(nomeArquivo);
+						pedidosList = retornaArquivo(NOMEARQUIVO);
 						list1 = new ArrayList<Pedido>();
 						list2 = new ArrayList<Pedido>();
 						ArrayList<Pedido> list3 = new ArrayList<Pedido>();
@@ -132,7 +132,7 @@ public class Main {
 								"=======================");
 
 
-						pedidosList = retornaArquivo(nomeArquivo);
+						pedidosList = retornaArquivo(NOMEARQUIVO);
 						ArrayList<Pedido> list1 = new ArrayList<Pedido>();
 						ArrayList<Pedido> list2 = new ArrayList<Pedido>();
 
@@ -144,12 +144,12 @@ public class Main {
 
 
 						FilaDePrioridade fp = new FilaDePrioridade(list1);
-						fp.executaRoundRobin();
+//						fp.executaRoundRobin();
 						System.out.println("\n\nImpressora 1");
 						resultadoImpressora(fp,comEntrega(list1));
 
 						FilaDePrioridade fp2 = new FilaDePrioridade(list2);
-						fp2.executaRoundRobin();
+//						fp2.executaRoundRobin();
 						System.out.println("\n\nImpressora 2");
 						resultadoImpressora(fp2,comEntrega(list2));
 
@@ -164,7 +164,7 @@ public class Main {
 								"=======================");
 
 						//reset das listas - com 3 listas
-						pedidosList = retornaArquivo(nomeArquivo);
+						pedidosList = retornaArquivo(NOMEARQUIVO);
 						list1 = new ArrayList<Pedido>();
 						list2 = new ArrayList<Pedido>();
 						ArrayList<Pedido> list3 = new ArrayList<Pedido>();
@@ -180,21 +180,21 @@ public class Main {
 
 						//primeira impressora
 						FilaDePrioridade fp1 = new FilaDePrioridade(list1);
-						fp1.executaRoundRobin();
+//						fp1.executaRoundRobin();
 						System.out.println("\n\nImpressora 1");
 						resultadoImpressora(fp1,comEntrega(list1));
 
 
 						//segunda impressora
 						fp2 = new FilaDePrioridade(list2);
-						fp2.executaRoundRobin();
+//						fp2.executaRoundRobin();
 						System.out.println("\n\nImpressora 2");
 						resultadoImpressora(fp2,comEntrega(list2));
 
 
 						//terceira impressora
 						FilaDePrioridade fp3 = new FilaDePrioridade(list3);
-						fp3.executaRoundRobin();
+//						fp3.executaRoundRobin();
 						System.out.println("\n\nImpressora 3");
 						resultadoImpressora(fp3,comEntrega(list3));
 
@@ -219,7 +219,7 @@ public class Main {
 					switch(getNImpressoras()) {
 					case 2:
 						//reset das listas - com 2 listas
-						pedidosList = retornaArquivo(nomeArquivo);
+						pedidosList = retornaArquivo(NOMEARQUIVO);
 						ArrayList<Pedido> list1 = new ArrayList<Pedido>();
 						ArrayList<Pedido> list2 = new ArrayList<Pedido>();
 
@@ -254,7 +254,7 @@ public class Main {
 						break;
 					case 3:
 						//reset das listas - com 3 listas
-						pedidosList = retornaArquivo(nomeArquivo);
+						pedidosList = retornaArquivo(NOMEARQUIVO);
 						list1 = new ArrayList<Pedido>();
 						list2 = new ArrayList<Pedido>();
 						ArrayList<Pedido> list3 = new ArrayList<Pedido>();
@@ -296,13 +296,13 @@ public class Main {
 						break;	
 					}
 				}
-			case 2:
+			case 2://Analisar
 				switch(getNImpressoras()) {
 				case 2:
 					System.out.println("Impressora 1 Fila\n"
 									 + "Impressora 2 Fila de Prioridade");
 					//reset das listas - com 2 listas
-					pedidosList = retornaArquivo(nomeArquivo);
+					pedidosList = retornaArquivo(NOMEARQUIVO);
 					ArrayList<Pedido> list1 = new ArrayList<Pedido>();
 					ArrayList<Pedido> list2 = new ArrayList<Pedido>();
 
@@ -318,6 +318,7 @@ public class Main {
 					
 					float tempoFila = fila1.executa();
 					fp1.executaRoundRobin();
+					
 					break;
 				case 3:
 					break;
@@ -330,15 +331,15 @@ public class Main {
 
 	public static void mediaImpressoras(Fila f1,Fila f2) {
 		int totalNoPrazo = f1.impressoesDentroDoPrazo() + f2.impressoesDentroDoPrazo();
-		//		float mRetorno = (f1.() + f2.())/2;
-		//		float mResposta = (f1.() + f2.())/2;
-		//		System.out.println("\n"+totalNoPrazo+"\t"+mRetorno+"\t"+mResposta);
+//		float mRetorno = (f1.getMediaRetorno() + f2.getMediaRetorno())/2;
+//		float mResposta = (f1.getMediaResposta() + f2.getMediaResposta())/2;
+//		System.out.println("\n"+totalNoPrazo+"\t"+mRetorno+"\t"+mResposta);
 	}
 	public static void mediaImpressoras(Fila f1,Fila f2,Fila f3) {
 		int totalNoPrazo = f1.impressoesDentroDoPrazo() + f2.impressoesDentroDoPrazo() + f3.impressoesDentroDoPrazo();
-		float mRetorno = 0;
-		float mResposta = 0;
-		System.out.println("\n"+totalNoPrazo+"\t"+mRetorno+"\t"+mResposta);
+//		float mRetorno = (f1.getMediaRetorno() + f2.getMediaRetorno() + f3.getMediaRetorno())/3;
+//		float mResposta = (f1.getMediaResposta() + f2.getMediaResposta() + f3.getMediaResposta())/3;
+//		System.out.println("\n"+totalNoPrazo+"\t"+mRetorno+"\t"+mResposta);
 	}
 	public static void mediaImpressoras(FilaDePrioridade fp1,FilaDePrioridade fp2) {
 		int totalNoPrazo = fp1.getEntreguesNoPrazo() + fp2.getEntreguesNoPrazo();
@@ -365,7 +366,6 @@ public class Main {
 		float mResposta = (r1.getMediaResposta()+r2.getMediaResposta() + r3.getMediaResposta())/3;
 		System.out.println("\n"+totalNoPrazo+"\t"+mRetorno+"\t"+mResposta);
 	}
-
 
 
 	public static void resultadoImpressora(Fila f, int comEntrega) {
@@ -406,8 +406,11 @@ public class Main {
 			for(int i=0;i<nPedidos;i++) {
 				String line = entry.readLine();
 				StringTokenizer lineT = new StringTokenizer(line,";");
-
+				
+				//Nome do pedido
 				String name = lineT.nextToken();
+				
+				//Quantidade de papeis
 				int papersAmmount = Integer.parseInt(lineT.nextToken());
 
 				//lendo a string e transformando em float
@@ -433,13 +436,6 @@ public class Main {
 
 	}
 
-
-	public static void toString(Pedido []pedidos) {
-		for(int i=0;i<144;i++)
-			System.out.println(pedidos);
-	}
-
-
 	public static int comEntrega(ArrayList<Pedido> list) {
 		int comEntrega = 0;
 		for(int i=0;i<list.size();i++)
@@ -463,11 +459,11 @@ public class Main {
 		int opcao;
 		do {
 			System.out.println("       -Grafica-\n"
-					+ "        -Menu-\n"
-					+ "Escolha qual metodo de impressao deseja:\n"
-					+ " 1- Fila\n"
-					+ " 2- Fila de Prioridades\n"
-					+ " 3- Round Robin");
+						  	 + "         -Menu-\n"
+							 + "Escolha qual metodo de impressao deseja:\n"
+							 + " 1- Fila\n"
+							 + " 2- Fila de Prioridades\n"
+							 + " 3- Round Robin");
 			Scanner scan = new Scanner(System.in);
 			opcao = scan.nextInt();
 			if(opcao !=1 && opcao != 2 && opcao != 3)
@@ -481,6 +477,7 @@ public class Main {
 		do {
 			System.out.print("Deseja imprimir com 2 ou 3 impressoras? ");
 			Scanner scan = new Scanner(System.in);
+			System.out.println("\n");
 			opcao = scan.nextInt();
 			if(opcao != 2 && opcao != 3)
 				System.out.println("  -Opcao invalida-\n");
@@ -493,12 +490,12 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		int opcao;
 		do {
-			System.out.println("Deseja encerrar?"
+			System.out.println("Deseja encerrar?\n"
 					+ " 1- Sim"
 					+ " 2- Nao");
 			opcao = scan.nextInt();
 			if(opcao != 1 && opcao != 2)
-				System.out.println("  -Opcao invalida");
+				System.out.println("  -Opcao invalida-");
 			else
 				encerrar = opcao == 1;
 		}while(opcao != 1 && opcao != 2);

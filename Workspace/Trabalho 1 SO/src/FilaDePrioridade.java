@@ -15,8 +15,13 @@ public class FilaDePrioridade{
 
 
 	public FilaDePrioridade(ArrayList<Pedido> list){
-		this.list=list;
-		definePriority();
+		setList(list);
+		executaRoundRobin();
+	}
+	
+	public FilaDePrioridade(ArrayList<Pedido> list,int quantum){
+		setList(list);
+		executaRoundRobin(quantum);
 	}
 	
 	public void executaRoundRobin() {
@@ -30,6 +35,21 @@ public class FilaDePrioridade{
 		tempoGasto=0;
 		for(int i=0;i<rr.length;i++)
 			tempoGasto +=rr[i].executa();		
+	}
+	
+	public void executaRoundRobin(int quantum) {
+		RoundRobin rr[] = new RoundRobin[5];
+		tempoGasto=0;
+		for(int i=0;i<rr.length;i++) {
+			rr[i] = new RoundRobin(getPriority(i+1,list),quantum);
+			tempoGasto +=rr[i].executa();	
+		}
+
+//		for(int i=0;i<rr.length;i++)
+//			rr[i].setList(getPriority(i+1,list));
+
+//		for(int i=0;i<rr.length;i++)
+//			tempoGasto +=rr[i].executa();		
 	}
 
 	public void executaFila() {
@@ -123,20 +143,6 @@ public class FilaDePrioridade{
 		}
 	}
 
-//	private void definePriorityArray() {
-//		
-//		for(int priority=1;priority<=lp.length;priority++)
-//			if(priority == 5) {
-//				for(int i=0;i<list.size();i++) 
-//					if(list.get(i).getDeliveryTime()==0)
-//						lp[priority-1].add(list.get(i));
-//			}else
-//				for(int i=0;i<list.size();i++)
-//					if((getBiggerLeftTime()/lp.length-1)*(priority-1) <= list.get(i).getTimeLeft() && list.get(i).getTimeLeft() <= (getBiggerLeftTime()/lp.length-1)*priority) 
-//						lp[priority-1].add(list.get(i));
-//		
-//	}
-	
 	public float getTempoGasto() {
 		return tempoGasto;
 	}
