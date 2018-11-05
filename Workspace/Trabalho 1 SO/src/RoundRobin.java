@@ -3,19 +3,25 @@ import java.util.ArrayList;
 public class RoundRobin {
 	private ArrayList<Pedido> list;
 	public float tempoDecorrido;
-	private int quantum = 7;
+	private int quantum;
 
 	public RoundRobin(ArrayList<Pedido> list) {
 		setList(list);
 		setTempoDecorrido(0);
+	}
+	public RoundRobin(ArrayList<Pedido> list,int quantum) {
+		setList(list);
+		setTempoDecorrido(0);
+		setQuantum(quantum);
 	}
 	public RoundRobin() {
 		setTempoDecorrido(0);
 	}
 	public RoundRobin(int quantum) {
 		setTempoDecorrido(0);
-		this.quantum = 7;
+		setQuantum(quantum);
 	}
+
 	
 	public float executa() {		
 		while(!terminou()) {
@@ -50,6 +56,14 @@ public class RoundRobin {
 		return !terminou;
 	}
 
+	public int getComEntrega() {
+		int comEntrega = 0;
+		for(int i=0;i<list.size();i++)
+			if(list.get(i).hasDelivery())
+				comEntrega++;
+		return comEntrega;
+	}
+	
 	public int getEntreguesNoPrazo() {
 		int entregues=0;
 		for(int i=0;i<list.size();i++)

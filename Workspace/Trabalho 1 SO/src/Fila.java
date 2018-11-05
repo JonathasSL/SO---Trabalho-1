@@ -8,7 +8,7 @@ public class Fila {
 
 	public Fila(ArrayList<Pedido> lista) {
 		setLista(lista);
-		setTempoGasto(tempoGasto);
+		setTempoGasto(0);
 		executa();
 		setMediaTempoRetorno(mediaTempoRetorno()); 
 	}
@@ -57,6 +57,14 @@ public class Fila {
 		return entreguesNoPrazo;
 	}
 
+	public int getComEntrega() {
+		int comEntrega = 0;
+		for(int i=0;i<lista.size();i++)
+			if(lista.get(i).hasDelivery())
+				comEntrega++;
+		return comEntrega;
+	}
+	
 	public float mediaTempoRetorno () {
 		for(int i=0;i<lista.size();i++)
 			media+=lista.get(i).getTimeDelivered();

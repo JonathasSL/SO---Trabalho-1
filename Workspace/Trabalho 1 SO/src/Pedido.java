@@ -64,7 +64,10 @@ public class Pedido {
 		this.deliveryTime = deliveryTime;
 		return this;
 	}
-
+	public boolean hasDelivery() {
+		return (deliveryTime == 0)?true:false;
+	}
+	
 	public String toString() {
 		return "Nome: "+name+"\tPapers Ammount: "+papersAmmount+"\tPrice per paper: "+price+"\tDelivery Time: "+deliveryTime;
 	}
