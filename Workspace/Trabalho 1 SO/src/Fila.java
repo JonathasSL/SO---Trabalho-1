@@ -3,8 +3,9 @@ import java.util.ArrayList;
 public class Fila {
 
 	private ArrayList<Pedido> lista;
-	private int tempoGasto; 
-	private float media;
+	private int tempoGasto;
+	private float tempoMedioRetorno;
+	private float tempoMedioResposta;
 
 	public Fila(ArrayList<Pedido> lista) {
 		setLista(lista);
@@ -28,13 +29,19 @@ public class Fila {
 	}
 
 	public float getMediaTempoRetorno() {
-		return media;
+		return tempoMedioRetorno;
 	}
-
-	public void setMediaTempoRetorno(float media) {
-		this.media = media;
+	public void setMediaTempoRetorno(float tempoMedioRetorno) {
+		this.tempoMedioRetorno = tempoMedioRetorno;
 	}	
 
+	public float getTempoMedioResposta() {
+		return tempoMedioResposta;
+	}
+	public void setTempoMedioResposta(float tempoMedioResposta) {
+		this.tempoMedioResposta = tempoMedioResposta;
+		}
+	
 	public float executa () {
 		for (int i=0; i<lista.size(); i++) {
 			lista.get(i).setStartedTime(tempoGasto);
@@ -67,17 +74,17 @@ public class Fila {
 	
 	public float mediaTempoRetorno () {
 		for(int i=0;i<lista.size();i++)
-			media+=lista.get(i).getTimeDelivered();
-		media = media/lista.size();	
-		return media;
+			tempoMedioRetorno+=lista.get(i).getTimeDelivered();
+		tempoMedioRetorno /= lista.size();	
+		return tempoMedioRetorno;
 	}
+	
 	public float mediaTempoResposta () {
-		float tempoMedioResposta = 0;
 		for (int i=0; i<lista.size(); i++) {
 			tempoMedioResposta += lista.get(i).getStartedTime();
 		}
-		return tempoMedioResposta / lista.size();
+		tempoMedioResposta /= lista.size();
+		return tempoMedioResposta;
 	}
-
 }
 
