@@ -15,34 +15,6 @@ public class Main {
 
 		
 		do {
-			if(true) {
-				for(int n=1;n<=30;n++) {
-				ArrayList<Pedido> pedidosList = retornaArquivo(NOMEARQUIVO);
-				
-				ArrayList<Pedido> list1 = new ArrayList<Pedido>();
-				ArrayList<Pedido> list2 = new ArrayList<Pedido>();
-				ArrayList<Pedido> list3 = new ArrayList<Pedido>();
-
-
-				for(int i=0;i<pedidosList.size()/3;i++)
-					list1.add(pedidosList.get(i));
-
-				for(int i=pedidosList.size()/3;i<2*pedidosList.size()/3;i++)
-					list2.add(pedidosList.get(i));
-
-				for(int i=2*pedidosList.size()/3;i<pedidosList.size();i++)
-					list3.add(pedidosList.get(i));
-				
-//					System.out.println("\n\n\n\tq: "+n);
-					RoundRobin fp1 = new RoundRobin(list1,n);
-					RoundRobin fp2 = new RoundRobin(list2,n);
-					RoundRobin fp3 = new RoundRobin(list3,n);
-					mediaImpressoras(fp1,fp2,fp3);
-				}
-//				for(int i=0;i<pedidosList.size();i++) {
-//					System.out.println(pedidosList.get(i));}
-				break;
-			}
 			ArrayList<Pedido> pedidosList = retornaArquivo(NOMEARQUIVO);
 //			switch(menu()) {
 //			case 1: //Imprimir
@@ -76,22 +48,17 @@ public class Main {
 								"========================\n");
 
 						System.out.println("Impressora 1\n");
-						resultadoImpressora(impressora1,impressora1.getComEntrega());//metodo com os prints inbutidos
-						//		System.out.println("Impressoes entregues no prazo: "+impressora1.impressoesDentroDoPrazo()+" de "+comEntrega);
-						//		System.out.println("Tempo medio de Retorno: "+impressora1.mediaTempoRetorno());
-						//		System.out.println("Tempo medio de Resposta: "+impressora1.mediaTempoResposta());
-						//		System.out.println("Tempo total de Impressão: "+impressora1.executa());
-
+						resultadoImpressora(impressora1);//metodo com os prints embutidos
+			
 						System.out.println("\nImpressora 2\n");
-						resultadoImpressora(impressora2,impressora2.getComEntrega());
-						//		System.out.println("Impressoes entregues no prazo: "+impressora2.impressoesDentroDoPrazo()+" de "+comEntrega);
-						//		System.out.println("Tempo medio de Retorno: "+impressora2.mediaTempoRetorno());
-						//		System.out.println("Tempo medio de Resposta: "+impressora2.mediaTempoResposta());
-						//		System.out.println("Tempo total de Impressao: "+impressora2.executa());
+						resultadoImpressora(impressora2);
+						
+						System.out.println("\nMedia de 2 impressoras");
+						mediaImpressoras(impressora1, impressora2);						
 						break;
-
+						
+						
 					case 3:
-
 						System.out.println("\n========================\n"+
 								"=======FILA COM 3=======\n"+
 								"========================\n");
@@ -117,26 +84,16 @@ public class Main {
 						System.out.println("\n-----3 impressoras-----\n"+
 								"=======================");
 						System.out.println("Impressora 1\n");
-						resultadoImpressora(impressora1,impressora1.getComEntrega());
-						//		System.out.println("Impressões entregues no prazo: "+impressora1.impressoesDentroDoPrazo());
-						//		System.out.println("Tempo Médio de Retorno: "+impressora1.mediaTempoRetorno());
-						//		System.out.println("Tempo Médio de Resposta: "+impressora1.mediaTempoResposta());
-						//		System.out.println("Tempo Total de Impressão: "+impressora1.executa());
+						resultadoImpressora(impressora1);
 
 						System.out.println("\nImpressora 2\n");
-						resultadoImpressora(impressora2,impressora2.getComEntrega());
-						//		System.out.println("Impressões entregues no prazo: "+impressora2.impressoesDentroDoPrazo());
-						//		System.out.println("Tempo Médio de Retorno: "+impressora2.mediaTempoRetorno());
-						//		System.out.println("Tempo Médio de Resposta: "+impressora2.mediaTempoResposta());
-						//		System.out.println("Tempo Total de Impressão: "+impressora2.executa());
-
+						resultadoImpressora(impressora2);
 
 						System.out.println("\nImpressora 3\n");
-						resultadoImpressora(impressora3,impressora3.getComEntrega());
-						//		System.out.println("Impressões entregues no prazo: "+impressora3.impressoesDentroDoPrazo());
-						//		System.out.println("Tempo Médio de Retorno: "+impressora3.mediaTempoRetorno());
-						//		System.out.println("Tempo Médio de Resposta: "+impressora3.mediaTempoResposta());
-						//		System.out.println("Tempo Total de Impressão: "+impressora3.executa());
+						resultadoImpressora(impressora3);
+						
+						System.out.println("\nMedia de 3 impressoras");
+						mediaImpressoras(impressora1, impressora2, impressora3);
 						break;
 					default:
 						break;
@@ -176,12 +133,12 @@ public class Main {
 						FilaDePrioridade fp = new FilaDePrioridade(list1);
 //						fp.executaRoundRobin();
 						System.out.println("\n\nImpressora 1");
-						resultadoImpressora(fp,fp.getComEntrega());
+						resultadoImpressora(fp);
 
 						FilaDePrioridade fp2 = new FilaDePrioridade(list2);
 //						fp2.executaRoundRobin();
 						System.out.println("\n\nImpressora 2");
-						resultadoImpressora(fp2,fp2.getComEntrega());
+						resultadoImpressora(fp2);
 
 						mediaImpressoras(fp,fp2);
 						break;
@@ -212,21 +169,21 @@ public class Main {
 						FilaDePrioridade fp1 = new FilaDePrioridade(list1);
 //						fp1.executaRoundRobin();
 						System.out.println("\n\nImpressora 1");
-						resultadoImpressora(fp1,fp1.getComEntrega());
+						resultadoImpressora(fp1);
 
 
 						//segunda impressora
 						fp2 = new FilaDePrioridade(list2);
 //						fp2.executaRoundRobin();
 						System.out.println("\n\nImpressora 2");
-						resultadoImpressora(fp2,fp2.getComEntrega());
+						resultadoImpressora(fp2);
 
 
 						//terceira impressora
 						FilaDePrioridade fp3 = new FilaDePrioridade(list3);
 //						fp3.executaRoundRobin();
 						System.out.println("\n\nImpressora 3");
-						resultadoImpressora(fp3,fp3.getComEntrega());
+						resultadoImpressora(fp3);
 
 						mediaImpressoras(fp1,fp2,fp3);
 						break;
@@ -268,13 +225,13 @@ public class Main {
 						RoundRobin r1 = new RoundRobin(list1);
 						float tempot1 = r1.executa();
 						System.out.println("\nImpressora 1");
-						resultadoImpressora(r1,r1.getComEntrega());
+						resultadoImpressora(r1);
 
 						//segunda impressora
 						RoundRobin r2 = new RoundRobin(list2);
 						float tempot2 = r2.executa();
 						System.out.println("\n\nImpressora 2");
-						resultadoImpressora(r2,r2.getComEntrega());
+						resultadoImpressora(r2);
 
 						mediaImpressoras(r1,r2);
 
@@ -306,19 +263,19 @@ public class Main {
 						r1 = new RoundRobin(list1);
 						tempot1 = r1.executa();
 						System.out.println("\nImpressora 1");
-						resultadoImpressora(r1,r1.getComEntrega());
+						resultadoImpressora(r1);
 
 						//segunda impressora 
 						r2 = new RoundRobin(list2);
 						tempot2 = r2.executa();
 						System.out.println("\n\nImpressora 2");
-						resultadoImpressora(r2,r2.getComEntrega());
+						resultadoImpressora(r2);
 
 						//terceira impressora
 						RoundRobin r3 = new RoundRobin(list3);
 						float tempot3 = r3.executa();
 						System.out.println("\n\nImpressora 3");
-						resultadoImpressora(r3,r3.getComEntrega());
+						resultadoImpressora(r3);
 
 						mediaImpressoras(r1,r2,r3);
 						break;
@@ -654,21 +611,21 @@ public class Main {
 	}
 
 
-	public static void resultadoImpressora(Fila f, int comEntrega) {
-		System.out.println("Impressoes entregues no prazo: "+f.impressoesDentroDoPrazo()+" de "+comEntrega);
+	public static void resultadoImpressora(Fila f) {
+		System.out.println("Impressoes entregues no prazo: "+f.impressoesDentroDoPrazo()+" de "+f.getComEntrega());
 		System.out.println("Tempo medio de Retorno: "+f.mediaTempoRetorno());
 		System.out.println("Tempo medio de Resposta: "+f.mediaTempoResposta());
 		System.out.println("Tempo total de Impressão: "+f.executa());
 	}
-	public static void resultadoImpressora(FilaDePrioridade f, int comEntrega) {
-		System.out.println("Impresoes entregues no prazo= "+f.getEntreguesNoPrazo()+" de "+comEntrega);
+	public static void resultadoImpressora(FilaDePrioridade f) {
+		System.out.println("Impresoes entregues no prazo= "+f.getEntreguesNoPrazo()+" de "+f.getComEntrega());
 		System.out.println("Tempo medio de Retorno: "+f.getMediaRetorno());
 		System.out.println("Tempo medio de Resposta: "+f.getMediaResposta());
 		System.out.println("Tempo total de impressao: "+f.getTempoGasto());
 
 	}
-	public static void resultadoImpressora(RoundRobin r, int comEntrega) {
-		System.out.println("Impresoes entregues no prazo= "+r.getEntreguesNoPrazo()+" de "+comEntrega);
+	public static void resultadoImpressora(RoundRobin r) {
+		System.out.println("Impresoes entregues no prazo= "+r.getEntreguesNoPrazo()+" de "+r.getComEntrega());
 		System.out.println("Tempo medio de Retorno: "+r.getMediaRetorno());
 		System.out.println("Tempo medio de Resposta: "+r.getMediaResposta());
 
