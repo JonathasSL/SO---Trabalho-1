@@ -10,7 +10,7 @@ public class Pedido {
 	private float duration;
 	private float totalPrice;
 	private float tempoDecorrido;
-	private float startedTime;
+	private float startedTime = 0;
 
 	public Pedido(String name, int papersAmmount, float price, int deliveryTime) {
 		setName(name);
@@ -21,6 +21,7 @@ public class Pedido {
 		setTimeLeft();
 		setTotalPrice();
 		this.tempoDecorrido=0;
+		setTimeDelivered(0);
 
 	}
 
@@ -31,6 +32,12 @@ public class Pedido {
 		setDuration();
 		setTimeLeft();
 		setTotalPrice();
+	}
+	
+	public boolean isDone() {
+		if(tempoDecorrido == duration)
+			return true;
+		return false;
 	}
 	
 	public String getName() {
@@ -68,8 +75,16 @@ public class Pedido {
 		return (deliveryTime == 0)?true:false;
 	}
 	
+	@Override
 	public String toString() {
-		return "Nome: "+name+"\tPapers Ammount: "+papersAmmount+"\tPrice per paper: "+price+"\tDelivery Time: "+deliveryTime;
+		String string = "Pedido [name=" + name ;
+		while(string.length()<40)
+			string+=" ";
+		string+=", papersAmmount=" + papersAmmount + ", \tprice=" + price + ", \tdeliveryTime="
+				+ deliveryTime + ", \ttimeDelivered=" + timeDelivered + ", \ttimeLeft=" + timeLeft + ", \tduration="
+				+ duration + ", \ttotalPrice=" + totalPrice + ", \ttempoDecorrido=" + tempoDecorrido + ", \tstartedTime="
+				+ startedTime + "]";
+		return string;
 	}
 
 	public float getTimeDelivered() {
@@ -92,32 +107,38 @@ public class Pedido {
 	public float getDuration() {
 		return duration;
 	}
-	private void setDuration() {
+	private Pedido setDuration() {
 		this.duration = papersAmmount/80;
+		return this;
 	}
 
 	public float getTotalPrice() {
 		return totalPrice;
 	}
-	public void setTotalPrice() {
+	public Pedido setTotalPrice() {
 		this.totalPrice = papersAmmount*price;
+		return this;
 	}
 
 	public float getTempoDecorrido() {
 		return tempoDecorrido;
 	}
-	public void setTempoDecorrido(float tempoDecorrido) {
+	public Pedido setTempoDecorrido(float tempoDecorrido) {
 		this.tempoDecorrido += tempoDecorrido;
+		return this;
 	}
 
 	public float getStartedTime() {
 		return startedTime;
 	}
-	public void setStartedTime(float startedTime) {
+	public Pedido setStartedTime(float startedTime) {
 		this.startedTime = startedTime;
+		return this;
 	}
 
 	public float getDurationLeft() {
 		return duration - tempoDecorrido;
 	}
+
+	
 }
