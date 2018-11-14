@@ -4,7 +4,7 @@ public class FilaDePrioridade{
 	private ArrayList<Pedido> list;
 	private float tempoGasto;
 
-//	private ArrayList<?> lp[] = new ArrayList<>[5];
+//	private ArrayList<Pedido> lp[] = new ArrayList<Pedido>[5];
 	
 	private ArrayList<Pedido> l1 = new ArrayList<Pedido>();
 	private ArrayList<Pedido> l2 = new ArrayList<Pedido>();
@@ -17,9 +17,24 @@ public class FilaDePrioridade{
 		executaRoundRobin();
 	}
 	
-	public FilaDePrioridade(ArrayList<Pedido> list,int quantum){
+	public FilaDePrioridade(ArrayList<Pedido> list, int tempoLimite){
 		setList(list);
-		executaRoundRobin(quantum);
+		setTempoGasto(0);
+		executaRoundRobin(tempoLimite);
+	}
+	
+	public FilaDePrioridade(ArrayList<Pedido> list, int quantum, int tempoLimite){
+		setList(list);
+		this.tempoGasto = 0;
+		executaRoundRobin(quantum,tempoLimite);
+	}
+
+	public void executaRoundRobin(int tempoLimite) {
+		RoundRobin rr[] = new RoundRobin[5];
+		for(int i=0;i<rr.length && tempoGasto < tempoLimite;i++) {
+			rr[i] = new RoundRobin(getPriority(i+1,list),tempoGasto,tempoLimite);
+			tempoGasto +=rr[i].executa();
+		}
 	}
 	
 	public void executaRoundRobin() {
@@ -37,7 +52,7 @@ public class FilaDePrioridade{
 //			tempoGasto +=rr[i].executa();		
 	}
 	
-	public void executaRoundRobin(int quantum) {
+	public void executaRoundRobin(int quantum, int tempoLimite) {
 		RoundRobin rr[] = new RoundRobin[5];
 		tempoGasto=0;
 		for(int i=0;i<rr.length;i++) {
