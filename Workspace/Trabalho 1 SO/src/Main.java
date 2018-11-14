@@ -555,15 +555,25 @@ public class Main {
 
 	public static void mediaImpressoras(Fila f1,Fila f2) {
 		int totalNoPrazo = f1.impressoesDentroDoPrazo() + f2.impressoesDentroDoPrazo();
-//		float mRetorno = (f1.getMediaRetorno() + f2.getMediaRetorno())/2;
-//		float mResposta = (f1.getMediaResposta() + f2.getMediaResposta())/2;
-//		System.out.println("\n"+totalNoPrazo+"\t"+mRetorno+"\t"+mResposta);
+		float mRetorno = (f1.mediaTempoRetorno() + f2.mediaTempoRetorno())/2;
+		float mResposta = (f1.mediaTempoResposta() + f2.mediaTempoResposta())/2;
+		StringTokenizer str = new StringTokenizer(String.valueOf(mRetorno),".");
+		String retorno=str.nextToken()+","+str.nextToken();
+		str = new StringTokenizer(String.valueOf(mResposta),".");
+		String resposta=str.nextToken()+","+str.nextToken();
+		System.out.println("\nTotal no:\nPrazo\tRetorno\t\tResposta");
+		System.out.println(totalNoPrazo+"\t"+retorno+"\t"+resposta);
 	}
 	public static void mediaImpressoras(Fila f1,Fila f2,Fila f3) {
 		int totalNoPrazo = f1.impressoesDentroDoPrazo() + f2.impressoesDentroDoPrazo() + f3.impressoesDentroDoPrazo();
-//		float mRetorno = (f1.getMediaRetorno() + f2.getMediaRetorno() + f3.getMediaRetorno())/3;
-//		float mResposta = (f1.getMediaResposta() + f2.getMediaResposta() + f3.getMediaResposta())/3;
-//		System.out.println("\n"+totalNoPrazo+"\t"+mRetorno+"\t"+mResposta);
+		float mRetorno = (f1.mediaTempoRetorno() + f2.mediaTempoRetorno() + f3.mediaTempoRetorno())/3;
+		float mResposta = (f1.mediaTempoResposta() + f2.mediaTempoResposta() + f3.mediaTempoResposta())/3;
+		StringTokenizer str = new StringTokenizer(String.valueOf(mRetorno),".");
+		String retorno=str.nextToken()+","+str.nextToken();
+		str = new StringTokenizer(String.valueOf(mResposta),".");
+		String resposta=str.nextToken()+","+str.nextToken();
+		System.out.println("\nTotal no:\nPrazo\tRetorno\t\tResposta");
+		System.out.println(totalNoPrazo+"\t"+retorno+"\t"+resposta);
 	}
 	public static void mediaImpressoras(FilaDePrioridade fp1,FilaDePrioridade fp2) {
 		int totalNoPrazo = fp1.getEntreguesNoPrazo() + fp2.getEntreguesNoPrazo();
@@ -697,13 +707,13 @@ public class Main {
 							 + "Escolha qual metodo de impressao deseja:\n"
 							 + " 1- Fila\n"
 							 + " 2- Fila de Prioridades\n"
-							 + " 3- Round Robin\n"
-							 + " 4- Todos acima");
+							 + " 3- Round Robin\n"/*
+							 + " 4- Todos acima"*/);
 			Scanner scan = new Scanner(System.in);
 			opcao = scan.nextInt();
-			if(opcao !=1 && opcao != 2 && opcao != 3 && opcao != 4)
+			if(opcao !=1 && opcao != 2 && opcao != 3/* && opcao != 4*/)
 				System.out.println("  -Opcao invalida-\n\n");
-		}while(opcao !=1 && opcao != 2 && opcao != 3 && opcao != 4);
+		}while(opcao !=1 && opcao != 2 && opcao != 3/* && opcao != 4*/);
 		return opcao;
 	}
 
