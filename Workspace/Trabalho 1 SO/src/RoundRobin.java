@@ -27,7 +27,40 @@ public class RoundRobin {
 		setQuantum(quantum);
 		executa();
 	}
+	public RoundRobin(ArrayList<Pedido> priority, float tempoDecorrido, int tempoLimite) {
+		setList(list);
+		setTempoDecorrido(tempoDecorrido);
+		setQuantum(5);
+		executa(tempoLimite);
+	}
+	public float executa(int tempoLimite) {
+		while(!terminou(tempoLimite)) {
+			for(int i=0;i<list.size() && tempoDecorrido < tempoLimite;i++) {
+				if(!list.get(i).isDone()) {
+					if(list.get(i).getTempoDecorrido()==0)
+						list.get(i).setStartedTime(tempoDecorrido);
 
+					if(list.get(i).getDurationLeft() > quantum) {
+						list.get(i).setTempoDecorrido(quantum);
+						tempoDecorrido+=quantum;//list.get(i).getDurationLeft() ?
+					}else {
+						list.get(i).setTempoDecorrido(list.get(i).getDurationLeft());
+						tempoDecorrido+=quantum;
+					}
+					
+					if(list.get(i).isDone())
+						if(list.get(i).getTimeDelivered() == 0)
+							list.get(i).setTimeDelivered(tempoDecorrido);
+
+					tempoDecorrido+=0.25;
+				}
+			}
+
+		}
+		return tempoDecorrido;
+
+	}
+	
 	
 	public float executa() {
 		while(!terminou()) {
@@ -61,6 +94,16 @@ public class RoundRobin {
 		boolean terminou = true;
 		for(int i=0;i<list.size() && terminou;i++)
 			terminou = list.get(i).isDone();
+		return terminou;
+	}
+	public boolean terminou(int tempoLimite) {
+		boolean terminou = true;
+		System.out.println(terminou);
+		if(tempoDecorrido<tempoLimite) {
+			System.out.println(list.isEmpty());
+			for(int i=0;i<list.size() && terminou;i++) { 
+				terminou = list.get(i).isDone();}
+		}
 		return terminou;
 	}
 

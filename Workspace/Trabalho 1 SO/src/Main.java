@@ -550,7 +550,7 @@ public class Main {
 //				break;
 //			}
 		}while(!encerrar());
-
+		System.out.println(" --Programa Encerrado--");
 	}
 
 	public static void mediaImpressoras(Fila f1,Fila f2) {
